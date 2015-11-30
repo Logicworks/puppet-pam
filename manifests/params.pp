@@ -65,6 +65,7 @@ class pam::params {
       # ldap
       $ldap_package = 'libpam-ldap'
       $ldapd_package = 'libpam-ldapd'
+      $ldapconf_path = '/etc/ldap/ldap.conf'
       $pam_auth_update_ldap_source = [
         "puppet:///modules/pam/pam-configs/${::lsbdistcodename}_ldap",
         'puppet:///modules/pam/pam-configs/ldap'

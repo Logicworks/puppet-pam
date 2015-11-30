@@ -34,6 +34,7 @@ class pam::ldap (
   $autoupgrade      = 'UNDEF',
   $source           = 'UNDEF',
   $content          = 'UNDEF',
+  $ldapconf_path    = 'UNDEF',
   $ldapconf_source  = 'UNDEF',
   $ldapconf_content = 'UNDEF',
   $ldapconf_params  = 'UNDEF'
@@ -65,6 +66,10 @@ class pam::ldap (
       default => template($pam::params::pam_auth_update_ldap_template)
     },
     default   => $content
+  }
+  $ldapconf_path_real = $ldapconf_path ? {
+    'UNDEF' => $pam::params::ldapconf_path,
+    default => $ldapconf_path
   }
   $ldapconf_source_real = $ldapconf_source ? {
     'UNDEF' => $pam::params::ldapconf_source,
@@ -128,7 +133,7 @@ class pam::ldap (
   }
   file { 'ldap.conf':
     ensure => $ensure_real,
-    path   => '/etc/ldap.conf',
+    path   => $ldapconf_path_real,
     mode   => '0644',
     owner  => 'root',
     group  => 'root',
