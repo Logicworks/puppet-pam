@@ -110,9 +110,6 @@ class pam::ldap (
         notify  => Exec['pam_auth_update'],
         require => Package['pamldap']
       }
-      service { 'libnss-ldapd':
-        enable  => false
-      }
     }
     default: { }
   }
